@@ -1,0 +1,441 @@
+wang@ubuntu:~/Documents/OS-exp/project6-start-code-wang$ make
+cc -D_FILE_OFFSET_BITS=64 -I/usr/include/fuse  -std=gnu99 -g3 -Wall -Wextra -D_FILE_OFFSET_BITS=64 -DFUSE_USE_VERSION=26   -c -o common.o common.c
+common.c: In function ‘init_debug_directory’:
+common.c:68:17: warning: ‘return’ with a value, in function returning void
+          return 0;
+                 ^
+common.c: In function ‘read_debug_directory’:
+common.c:75:9: warning: implicit declaration of function ‘read_file’ [-Wimplicit-function-declaration]
+         read_file(debug_directory[i],i);
+         ^
+common.c: In function ‘count_second_indirect_blocks_num’:
+common.c:121:9: warning: unused variable ‘second_indirect_blocks_num’ [-Wunused-variable]
+     int second_indirect_blocks_num = 0;
+         ^
+common.c: In function ‘get_file_indirect_block_index_array’:
+common.c:135:24: warning: passing argument 1 of ‘device_read_sector’ from incompatible pointer type [-Wincompatible-pointer-types]
+     device_read_sector(&first_indirect_block,inode->indirect_block);
+                        ^
+In file included from common.h:15:0,
+                 from common.c:1:
+disk.h:12:5: note: expected ‘unsigned char *’ but argument is of type ‘indirect_block_t * {aka struct indirect_block_t *}’
+ int device_read_sector(unsigned char buffer[], int sector);
+     ^
+common.c: In function ‘get_file_datablock_index_array’:
+common.c:160:28: warning: passing argument 1 of ‘device_read_sector’ from incompatible pointer type [-Wincompatible-pointer-types]
+         device_read_sector(&second_indirect_block[j],second_indirect_block_inde
+                            ^
+In file included from common.h:15:0,
+                 from common.c:1:
+disk.h:12:5: note: expected ‘unsigned char *’ but argument is of type ‘indirect_block_t * {aka struct indirect_block_t *}’
+ int device_read_sector(unsigned char buffer[], int sector);
+     ^
+common.c:164:45: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for(k=0; i<inode->blocks_number && k<BLOCK_SIZE/sizeof(int) ; ++i,++k){
+                                             ^
+common.c: In function ‘device_clear_sector’:
+common.c:191:25: warning: pointer targets in passing argument 1 of ‘device_write_sector’ differ in signedness [-Wpointer-sign]
+     device_write_sector(buf,sector_num);
+                         ^
+In file included from common.h:15:0,
+                 from common.c:1:
+disk.h:13:5: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+ int device_write_sector(unsigned char buffer[], int sector);
+     ^
+common.c: In function ‘read_bitmap’:
+common.c:241:30: warning: pointer targets in passing argument 1 of ‘device_read_multi_sector’ differ in signedness [-Wpointer-sign]
+     device_read_multi_sector(bitmap,start_block,INODE_BITMAP_BLOCKS_NUM);   // 
+                              ^
+common.c:173:5: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+ int device_read_multi_sector(unsigned char buffer[],int start_sector,int sector
+     ^
+common.c: In function ‘write_bitmap’:
+common.c:255:31: warning: pointer targets in passing argument 1 of ‘device_write_multi_sector’ differ in signedness [-Wpointer-sign]
+     device_write_multi_sector(bitmap,start_block,INODE_BITMAP_BLOCKS_NUM);   //
+                               ^
+common.c:181:5: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+ int device_write_multi_sector(unsigned char buffer[],int start_sector,int secto
+     ^
+common.c: In function ‘read_inode_disk_table’:
+common.c:259:30: warning: passing argument 1 of ‘device_read_multi_sector’ from incompatible pointer type [-Wincompatible-pointer-types]
+     device_read_multi_sector(inode_disk_table,INODE_BLOCKS_LOC,INODE_BLOCKS_NUM
+                              ^
+common.c:173:5: note: expected ‘unsigned char *’ but argument is of type ‘inode_disk_t * {aka struct inode_disk_t *}’
+ int device_read_multi_sector(unsigned char buffer[],int start_sector,int sector
+     ^
+common.c: In function ‘write_inode_disk_table’:
+common.c:264:31: warning: passing argument 1 of ‘device_write_multi_sector’ from incompatible pointer type [-Wincompatible-pointer-types]
+     device_write_multi_sector(inode_disk_table,INODE_BLOCKS_LOC,INODE_BLOCKS_NU
+                               ^
+common.c:181:5: note: expected ‘unsigned char *’ but argument is of type ‘inode_disk_t * {aka struct inode_disk_t *}’
+ int device_write_multi_sector(unsigned char buffer[],int start_sector,int secto
+     ^
+common.c: In function ‘add_file_in_directory_by_inode’:
+common.c:505:74: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+ f(MAX_FILE_SIZE - inode_disk_table[directory_inode_index].file_size < sizeof(de
+                                                                     ^
+common.c: In function ‘add_dentry_in_directory_by_inode’:
+common.c:585:74: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+ f(MAX_FILE_SIZE - inode_disk_table[directory_inode_index].file_size < sizeof(de
+                                                                     ^
+common.c: In function ‘remove_dentry_in_directory_by_inode’:
+common.c:665:9: warning: unused variable ‘location’ [-Wunused-variable]
+     int location = i;
+         ^
+common.c: In function ‘file_increase_block_num’:
+common.c:938:9: warning: suggest braces around empty body in an ‘else’ statement [-Wempty-body]
+         ;
+         ^
+common.c:990:17: error: ‘add_new_first_indirect_block_num’ undeclared (first use in this function)
+     for(i=0 ; i<add_new_first_indirect_block_num ; ++i ){
+                 ^
+common.c:990:17: note: each undeclared identifier is reported only once for each function it appears in
+common.c:1028:24: warning: passing argument 1 of ‘device_read_sector’ from incompatible pointer type [-Wincompatible-pointer-types]
+     device_read_sector(first_indirect_block,new_first_indirect_block_index);
+                        ^
+In file included from common.h:15:0,
+                 from common.c:1:
+disk.h:12:5: note: expected ‘unsigned char *’ but argument is of type ‘indirect_block_t * {aka struct indirect_block_t *}’
+ int device_read_sector(unsigned char buffer[], int sector);
+     ^
+common.c:1032:25: warning: passing argument 1 of ‘device_write_sector’ from incompatible pointer type [-Wincompatible-pointer-types]
+     device_write_sector(first_indirect_block,new_first_indirect_block_index);
+                         ^
+In file included from common.h:15:0,
+                 from common.c:1:
+disk.h:13:5: note: expected ‘unsigned char *’ but argument is of type ‘indirect_block_t * {aka struct indirect_block_t *}’
+ int device_write_sector(unsigned char buffer[], int sector);
+     ^
+common.c:1038:24: warning: passing argument 1 of ‘device_read_sector’ from incompatible pointer type [-Wincompatible-pointer-types]
+     device_read_sector(second_indirect_block,first_indirect_block->indirect_blo
+                        ^
+In file included from common.h:15:0,
+                 from common.c:1:
+disk.h:12:5: note: expected ‘unsigned char *’ but argument is of type ‘indirect_block_t * {aka struct indirect_block_t *}’
+ int device_read_sector(unsigned char buffer[], int sector);
+     ^
+common.c:1039:50: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for(k=old_offset_in_second_indirect_block ; k<BLOCK_SIZE/sizeof(int) && new
+                                                  ^
+common.c:1042:25: warning: passing argument 1 of ‘device_write_sector’ from incompatible pointer type [-Wincompatible-pointer-types]
+     device_write_sector(second_indirect_block,first_indirect_block->indirect_bl
+                         ^
+In file included from common.h:15:0,
+                 from common.c:1:
+disk.h:13:5: note: expected ‘unsigned char *’ but argument is of type ‘indirect_block_t * {aka struct indirect_block_t *}’
+ int device_write_sector(unsigned char buffer[], int sector);
+     ^
+common.c:1046:28: warning: passing argument 1 of ‘device_read_sector’ from incompatible pointer type [-Wincompatible-pointer-types]
+         device_read_sector(second_indirect_block,first_indirect_block->indirect
+                            ^
+In file included from common.h:15:0,
+                 from common.c:1:
+disk.h:12:5: note: expected ‘unsigned char *’ but argument is of type ‘indirect_block_t * {aka struct indirect_block_t *}’
+ int device_read_sector(unsigned char buffer[], int sector);
+     ^
+common.c:1047:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for(k=0; k<BLOCK_SIZE/sizeof(int) && new_datablock_i<new_datablock_num 
+                   ^
+common.c:1050:29: warning: passing argument 1 of ‘device_write_sector’ from incompatible pointer type [-Wincompatible-pointer-types]
+         device_write_sector(second_indirect_block,first_indirect_block->indirec
+                             ^
+In file included from common.h:15:0,
+                 from common.c:1:
+disk.h:13:5: note: expected ‘unsigned char *’ but argument is of type ‘indirect_block_t * {aka struct indirect_block_t *}’
+ int device_write_sector(unsigned char buffer[], int sector);
+     ^
+common.c:942:9: warning: unused variable ‘add_indirect_datablock_num’ [-Wunused-variable]
+     int add_indirect_datablock_num    = new_indirect_datablock_num    - old_ind
+         ^
+common.c:941:9: warning: unused variable ‘add_direct_datablock_num’ [-Wunused-variable]
+     int add_direct_datablock_num      = new_direct_datablock_num      - old_dir
+         ^
+common.c:886:9: warning: unused variable ‘old_size’ [-Wunused-variable]
+     int old_size = inode->file_size;
+         ^
+common.c: In function ‘file_decrease_block_num’:
+common.c:1098:9: warning: unused variable ‘old_size’ [-Wunused-variable]
+     int old_size = inode->file_size;
+         ^
+common.c: In function ‘p6fs_mkdir’:
+common.c:1181:27: warning: passing argument 1 of ‘path_analize’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     result = path_analize(path,last_file_name,&second_last_inode_index,&last_in
+                           ^
+common.c:426:23: note: expected ‘char *’ but argument is of type ‘const char *’
+ path_analizing_result path_analize(char* path,char* last_file_name,int* second_
+                       ^
+common.c:1174:41: warning: unused parameter ‘mode’ [-Wunused-parameter]
+ int p6fs_mkdir(const char *path, mode_t mode)
+                                         ^
+common.c: In function ‘p6fs_rmdir’:
+common.c:1232:49: warning: passing argument 1 of ‘path_analize’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     path_analizing_result result = path_analize(path,file_name,&second_last_dir
+                                                 ^
+common.c:426:23: note: expected ‘char *’ but argument is of type ‘const char *’
+ path_analizing_result path_analize(char* path,char* last_file_name,int* second_
+                       ^
+common.c: In function ‘p6fs_readdir’:
+common.c:1264:49: warning: passing argument 1 of ‘path_analize’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     path_analizing_result result = path_analize(path,dir_name,&second_last_dir_
+                                                 ^
+common.c:426:23: note: expected ‘char *’ but argument is of type ‘const char *’
+ path_analizing_result path_analize(char* path,char* last_file_name,int* second_
+                       ^
+common.c:1259:77: warning: unused parameter ‘offset’ [-Wunused-parameter]
+ _readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, str
+                                                                     ^
+common.c:1259:108: warning: unused parameter ‘fileInfo’ [-Wunused-parameter]
+ id *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fileInfo)
+                                                                       ^
+common.c: In function ‘p6fs_mknod’:
+common.c:1301:27: warning: passing argument 1 of ‘path_analize’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     result = path_analize(path,last_file_name,&second_last_inode_index,&last_in
+                           ^
+common.c:426:23: note: expected ‘char *’ but argument is of type ‘const char *’
+ path_analizing_result path_analize(char* path,char* last_file_name,int* second_
+                       ^
+common.c:1292:53: warning: unused parameter ‘dev’ [-Wunused-parameter]
+ int p6fs_mknod(const char *path, mode_t mode, dev_t dev)
+                                                     ^
+common.c: In function ‘p6fs_symlink’:
+common.c:1330:30: warning: unused parameter ‘path’ [-Wunused-parameter]
+ int p6fs_symlink(const char *path, const char *link)
+                              ^
+common.c:1330:48: warning: unused parameter ‘link’ [-Wunused-parameter]
+ int p6fs_symlink(const char *path, const char *link)
+                                                ^
+common.c: In function ‘p6fs_link’:
+common.c:1348:49: warning: passing argument 1 of ‘path_analize’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     path_analizing_result result = path_analize(path,file_name,&second_last_dir
+                                                 ^
+common.c:426:23: note: expected ‘char *’ but argument is of type ‘const char *’
+ path_analizing_result path_analize(char* path,char* last_file_name,int* second_
+                       ^
+common.c:1360:53: warning: passing argument 1 of ‘path_analize’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     path_analizing_result new_result = path_analize(newpath,new_file_name,&new_
+                                                     ^
+common.c:426:23: note: expected ‘char *’ but argument is of type ‘const char *’
+ path_analizing_result path_analize(char* path,char* last_file_name,int* second_
+                       ^
+common.c: In function ‘p6fs_unlink’:
+common.c:1386:49: warning: passing argument 1 of ‘path_analize’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     path_analizing_result result = path_analize(path,file_name,&second_last_dir
+                                                 ^
+common.c:426:23: note: expected ‘char *’ but argument is of type ‘const char *’
+ path_analizing_result path_analize(char* path,char* last_file_name,int* second_
+                       ^
+common.c: In function ‘p6fs_open’:
+common.c:1432:49: warning: passing argument 1 of ‘path_analize’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     path_analizing_result result = path_analize(path,file_name,&second_last_dir
+                                                 ^
+common.c:426:23: note: expected ‘char *’ but argument is of type ‘const char *’
+ path_analizing_result path_analize(char* path,char* last_file_name,int* second_
+                       ^
+common.c: In function ‘p6fs_read’:
+common.c:1462:49: warning: passing argument 1 of ‘path_analize’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     path_analizing_result result = path_analize(path,file_name,&second_last_dir
+                                                 ^
+common.c:426:23: note: expected ‘char *’ but argument is of type ‘const char *’
+ path_analizing_result path_analize(char* path,char* last_file_name,int* second_
+                       ^
+common.c:1471:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     if(size+offset > inode->file_size)
+                    ^
+common.c:1456:94: warning: unused parameter ‘fileInfo’ [-Wunused-parameter]
+ r *path, char *buf, size_t size, off_t offset, struct fuse_file_info *fileInfo)
+                                                                       ^
+common.c: In function ‘p6fs_write’:
+common.c:1491:49: warning: passing argument 1 of ‘path_analize’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     path_analizing_result result = path_analize(path,file_name,&second_last_dir
+                                                 ^
+common.c:426:23: note: expected ‘char *’ but argument is of type ‘const char *’
+ path_analizing_result path_analize(char* path,char* last_file_name,int* second_
+                       ^
+common.c:1500:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     if(size+offset > inode->file_size){
+                    ^
+common.c:1486:101: warning: unused parameter ‘fileInfo’ [-Wunused-parameter]
+ h, const char *buf, size_t size, off_t offset, struct fuse_file_info *fileInfo)
+                                                                       ^
+common.c: In function ‘p6fs_truncate’:
+common.c:1526:49: warning: passing argument 1 of ‘path_analize’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     path_analizing_result result = path_analize(path,file_name,&second_last_dir
+                                                 ^
+common.c:426:23: note: expected ‘char *’ but argument is of type ‘const char *’
+ path_analizing_result path_analize(char* path,char* last_file_name,int* second_
+                       ^
+common.c: In function ‘p6fs_release’:
+common.c:1553:28: warning: initialization makes pointer from integer without a cast [-Wint-conversion]
+     struct file_info *fi = fileInfo->fh;
+                            ^
+common.c:1557:49: warning: passing argument 1 of ‘path_analize’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     path_analizing_result result = path_analize(path,file_name,&second_last_dir
+                                                 ^
+common.c:426:23: note: expected ‘char *’ but argument is of type ‘const char *’
+ path_analizing_result path_analize(char* path,char* last_file_name,int* second_
+                       ^
+common.c:1567:18: warning: assignment makes integer from pointer without a cast [-Wint-conversion]
+     fileInfo->fh = NULL;
+                  ^
+common.c: In function ‘p6fs_getattr’:
+common.c:1583:49: warning: passing argument 1 of ‘path_analize’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     path_analizing_result result = path_analize(path,file_name,&second_last_dir
+                                                 ^
+common.c:426:23: note: expected ‘char *’ but argument is of type ‘const char *’
+ path_analizing_result path_analize(char* path,char* last_file_name,int* second_
+                       ^
+common.c: In function ‘p6fs_utime’:
+common.c:1630:49: warning: passing argument 1 of ‘path_analize’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     path_analizing_result result = path_analize(path,file_name,&second_last_dir
+                                                 ^
+common.c:426:23: note: expected ‘char *’ but argument is of type ‘const char *’
+ path_analizing_result path_analize(char* path,char* last_file_name,int* second_
+                       ^
+common.c: In function ‘p6fs_chmod’:
+common.c:1648:49: warning: passing argument 1 of ‘path_analize’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     path_analizing_result result = path_analize(path,file_name,&second_last_dir
+                                                 ^
+common.c:426:23: note: expected ‘char *’ but argument is of type ‘const char *’
+ path_analizing_result path_analize(char* path,char* last_file_name,int* second_
+                       ^
+common.c: In function ‘p6fs_rename’:
+common.c:1669:49: warning: passing argument 1 of ‘path_analize’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     path_analizing_result result = path_analize(path,file_name,&second_last_dir
+                                                 ^
+common.c:426:23: note: expected ‘char *’ but argument is of type ‘const char *’
+ path_analizing_result path_analize(char* path,char* last_file_name,int* second_
+                       ^
+common.c:1681:53: warning: passing argument 1 of ‘path_analize’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     path_analizing_result new_result = path_analize(newpath,new_file_name,&new_
+                                                     ^
+common.c:426:23: note: expected ‘char *’ but argument is of type ‘const char *’
+ path_analizing_result path_analize(char* path,char* last_file_name,int* second_
+                       ^
+common.c: In function ‘p6fs_statfs’:
+common.c:1719:12: warning: format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long long int’ [-Wformat=]
+     printf("total inode number: %d\n",INODE_NUM);
+            ^
+common.c:1720:12: warning: format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long long int’ [-Wformat=]
+     printf("total datablock number:%d \n",DATA_BLOCKS_NUM);
+            ^
+common.c:1698:29: warning: unused parameter ‘path’ [-Wunused-parameter]
+ int p6fs_statfs(const char *path, struct statvfs *statInfo)
+                             ^
+common.c:1698:51: warning: unused parameter ‘statInfo’ [-Wunused-parameter]
+ int p6fs_statfs(const char *path, struct statvfs *statInfo)
+                                                   ^
+common.c: In function ‘my_mount’:
+common.c:1733:24: warning: pointer targets in passing argument 1 of ‘device_read_sector’ differ in signedness [-Wpointer-sign]
+     device_read_sector(block_buf,SUPER_BLOCKS_LOC);
+                        ^
+In file included from common.h:15:0,
+                 from common.c:1:
+disk.h:12:5: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+ int device_read_sector(unsigned char buffer[], int sector);
+     ^
+In file included from common.c:1:0:
+common.c: In function ‘my_mkfs’:
+common.h:29:25: warning: overflow in implicit constant conversion [-Woverflow]
+ #define TOTAL_DATA_SIZE ( (long long int)4*G )
+                         ^
+common.c:1774:51: note: in expansion of macro ‘TOTAL_DATA_SIZE’
+     init_superblock.total_data_size             = TOTAL_DATA_SIZE;
+                                                   ^
+common.c:1792:25: warning: pointer targets in passing argument 1 of ‘device_write_sector’ differ in signedness [-Wpointer-sign]
+     device_write_sector(block_buf,SUPER_BLOCKS_LOC);
+                         ^
+In file included from common.h:15:0,
+                 from common.c:1:
+disk.h:13:5: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+ int device_write_sector(unsigned char buffer[], int sector);
+     ^
+common.c:1793:25: warning: pointer targets in passing argument 1 of ‘device_write_sector’ differ in signedness [-Wpointer-sign]
+     device_write_sector(block_buf,BACKUP_SUPER_BLOCKS_LOC);
+                         ^
+In file included from common.h:15:0,
+                 from common.c:1:
+disk.h:13:5: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+ int device_write_sector(unsigned char buffer[], int sector);
+     ^
+common.c:1834:31: warning: passing argument 1 of ‘device_write_multi_sector’ from incompatible pointer type [-Wincompatible-pointer-types]
+     device_write_multi_sector(init_inode_disk_table,INODE_BLOCKS_LOC,INODE_BLOC
+                               ^
+common.c:181:5: note: expected ‘unsigned char *’ but argument is of type ‘inode_disk_t * {aka struct inode_disk_t *}’
+ int device_write_multi_sector(unsigned char buffer[],int start_sector,int secto
+     ^
+common.c:1835:25: warning: pointer targets in passing argument 1 of ‘device_write_sector’ differ in signedness [-Wpointer-sign]
+     device_write_sector(block_buf,DATA_BLOCKS_LOC);
+                         ^
+In file included from common.h:15:0,
+                 from common.c:1:
+disk.h:13:5: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+ int device_write_sector(unsigned char buffer[], int sector);
+     ^
+common.c: In function ‘p6fs_init’:
+common.c:1904:24: warning: pointer targets in passing argument 1 of ‘device_read_sector’ differ in signedness [-Wpointer-sign]
+     device_read_sector(block_buf,SUPER_BLOCKS_LOC);
+                        ^
+In file included from common.h:15:0,
+                 from common.c:1:
+disk.h:12:5: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+ int device_read_sector(unsigned char buffer[], int sector);
+     ^
+common.c:1906:24: warning: pointer targets in passing argument 1 of ‘device_read_sector’ differ in signedness [-Wpointer-sign]
+     device_read_sector(block_buf,BACKUP_SUPER_BLOCKS_LOC);
+                        ^
+In file included from common.h:15:0,
+                 from common.c:1:
+disk.h:12:5: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+ int device_read_sector(unsigned char buffer[], int sector);
+     ^
+common.c:1909:29: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     if(superblock.magic_num != MAGIC_NUMBER){
+                             ^
+common.c:1910:40: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         if(backup_superblock.magic_num == MAGIC_NUMBER){
+                                        ^
+common.c:1911:33: warning: pointer targets in passing argument 1 of ‘device_write_sector’ differ in signedness [-Wpointer-sign]
+             device_write_sector(block_buf,SUPER_BLOCKS_LOC);
+                                 ^
+In file included from common.h:15:0,
+                 from common.c:1:
+disk.h:13:5: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+ int device_write_sector(unsigned char buffer[], int sector);
+     ^
+common.c:1855:40: warning: unused parameter ‘conn’ [-Wunused-parameter]
+ void* p6fs_init(struct fuse_conn_info *conn)
+                                        ^
+common.c: In function ‘p6fs_destroy’:
+common.c:1925:25: warning: unused parameter ‘private_data’ [-Wunused-parameter]
+ void p6fs_destroy(void* private_data)
+                         ^
+common.c: In function ‘read_bitmap’:
+common.c:242:1: warning: control reaches end of non-void function [-Wreturn-type]
+ };
+ ^
+common.c: In function ‘write_bitmap’:
+common.c:256:1: warning: control reaches end of non-void function [-Wreturn-type]
+ };
+ ^
+common.c: In function ‘path_analize’:
+common.c:478:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+common.c: In function ‘apply_available_bit’:
+common.c:492:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+common.c: In function ‘file_decrease_block_num’:
+common.c:1123:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+common.c: In function ‘p6fs_symlink’:
+common.c:1341:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+common.c: In function ‘p6fs_statfs’:
+common.c:1723:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+<builtin>: recipe for target 'common.o' failed
+make: *** [common.o] Error 1
